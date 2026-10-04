@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow, noarchive" />
+  <meta name="theme-color" content="#8a5a2b" />
+  <title>تحميل تطبيق إبل لأندرويد</title>
+  <link rel="icon" type="image/png" href="./icon-192.png" />
+  <style>
+    :root { --brown: #8a5a2b; --brown-dark: #5b3a1a; --sand: #f5efe6; --ink: #2b2118; --muted: #8a7d6e; --line: #e6dccd; }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: -apple-system, 'Segoe UI', Tahoma, sans-serif; background: var(--sand); color: var(--ink); }
+    header { background: linear-gradient(135deg, #8a5a2b, #6b4220); color: #fff; text-align: center; padding: 34px 16px 28px; }
+    header .ico { font-size: 56px; }
+    header h1 { margin: 6px 0 4px; font-size: 26px; font-weight: 800; }
+    header p { margin: 0; opacity: .85; font-size: 14px; }
+    main { max-width: 520px; margin: -18px auto 24px; padding: 0 16px; }
+    .card { background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 20px; box-shadow: 0 6px 22px rgba(80,50,20,.08); }
+    .btn { display: block; text-align: center; text-decoration: none; background: var(--brown); color: #fff; font-weight: 800; font-size: 18px; padding: 16px; border-radius: 12px; }
+    .btn.disabled { background: var(--muted); pointer-events: none; }
+    .ver { text-align: center; color: var(--muted); font-size: 13px; margin-top: 10px; }
+    h2 { font-size: 16px; margin: 22px 0 10px; color: var(--brown-dark); }
+    ol { margin: 0; padding-inline-start: 22px; line-height: 1.9; font-size: 14.5px; }
+    .note { background: #fff8ec; border: 1px solid #e0a34a; border-radius: 12px; padding: 12px 14px; font-size: 13.5px; line-height: 1.8; margin-top: 16px; }
+    .web { text-align: center; margin-top: 18px; font-size: 14px; }
+    .web a { color: var(--brown); font-weight: 700; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="ico">🐪</div>
+    <h1>إبل</h1>
+    <p>تطبيق أندرويد</p>
+  </header>
+  <main>
+    <div class="card">
+      <a id="dl" class="btn disabled" href="#">⬇️ تحميل التطبيق</a>
+      <div class="ver" id="ver">جارٍ تجهيز الرابط…</div>
+
+      <h2>طريقة التثبيت</h2>
+      <ol>
+        <li>إن كان عندك تطبيق «إبل» قديم: <b>احذفه أولًا</b> (اضغط مطوّلًا على أيقونته ← إلغاء التثبيت). بياناتك محفوظة في السحابة ولن تضيع.</li>
+        <li>اضغط «تحميل التطبيق» أعلاه.</li>
+        <li>افتح الملف بعد اكتمال التحميل ← <b>تثبيت</b>.</li>
+        <li>إن سألك الجوال عن «تثبيت تطبيقات غير معروفة»: اسمح للمتصفح بذلك ثم ارجع وثبّت.</li>
+        <li>افتح التطبيق وسجّل الدخول بحسابك.</li>
+      </ol>
+
+      <div class="note">على الآيفون أو الكمبيوتر لا تحتاج تحميل شيء — افتح الرابط في المتصفح مباشرة.</div>
+    </div>
+    <div class="web"><a href="./">فتح إبل في المتصفح ←</a></div>
+  </main>
+  <script>
+    // رابط ملف التطبيق مبني من رقم آخر إصدار منشور، فهذه الصفحة لا تحتاج تعديلًا أبدًا
+    fetch('version.json?t=' + Date.now(), { cache: 'no-store' })
+      .then(function (r) { return r.json(); })
+      .then(function (v) {
+        var a = document.getElementById('dl');
+        a.href = 'apk/' + encodeURIComponent(v.id) + '/' + encodeURIComponent('إبل') + '.apk';
+        a.setAttribute('download', 'إبل.apk');
+        a.classList.remove('disabled');
+        var d = v.builtAt ? new Date(v.builtAt) : null;
+        document.getElementById('ver').textContent = 'الإصدار ' + (v.version || v.id) + (d ? ' · ' + d.toLocaleDateString('ar-SA') : '');
+      })
+      .catch(function () { document.getElementById('ver').textContent = 'تعذّر تجهيز الرابط — أعد تحميل الصفحة'; });
+  </script>
+</body>
+</html>
